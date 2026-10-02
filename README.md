@@ -77,7 +77,7 @@ TypeScript 7.0.2 was the latest registry version at setup time, but `openapi-typ
 
 ## Contract Follow-Up
 
-The OpenAPI registration schema sets password `minLength: 12`, while the supplied frontend requirements state 8–72 bytes. This frontend follows the generated contract for now; confirm and reconcile the backend validation rule before implementing registration.
+The backend validator and tests enforce passwords of 8–72 UTF-8 bytes containing letters and digits. The OpenAPI registration schema instead sets `minLength: 12`, which is character-based. The registration UI follows the backend implementation with `TextEncoder`; reconcile the OpenAPI contract with the backend before relying on generated validation metadata.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

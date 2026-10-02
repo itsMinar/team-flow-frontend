@@ -1,4 +1,6 @@
 import { afterAll, afterEach, beforeAll } from "vitest";
+import "@testing-library/jest-dom/vitest";
+import { cleanup } from "@testing-library/react";
 import { server } from "./src/test/server";
 
 const promiseConstructor = Promise as PromiseConstructor & {
@@ -23,5 +25,8 @@ if (typeof promiseConstructor.withResolvers !== "function") {
 }
 
 beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
+afterEach(() => {
+  cleanup();
+  server.resetHandlers();
+});
 afterAll(() => server.close());

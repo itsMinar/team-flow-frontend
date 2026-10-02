@@ -84,9 +84,13 @@ function emitRateLimit(retryAfter: unknown): void {
   );
 }
 
-function endSession(): void {
+export function clearClientSession(): void {
   useAuthStore.getState().clearSession();
   clearQueryCache();
+}
+
+function endSession(): void {
+  clearClientSession();
 
   if (typeof window === "undefined" || window.location.pathname === "/login") {
     return;

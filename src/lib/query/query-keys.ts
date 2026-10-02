@@ -5,10 +5,25 @@ export type QueryFilters = Readonly<
 export const queryKeys = {
   currentUser: ["auth", "me"] as const,
   organizations: ["organizations"] as const,
+  organization: (orgId: string) => ["organizations", orgId] as const,
+  dashboard: (orgId: string) => ["organizations", orgId, "dashboard"] as const,
   projectList: (orgId: string, filters: QueryFilters = {}) =>
     ["organizations", orgId, "projects", filters] as const,
   project: (orgId: string, projectId: string) =>
     ["organizations", orgId, "projects", projectId] as const,
+  projectActivity: (
+    orgId: string,
+    projectId: string,
+    filters: QueryFilters = {},
+  ) =>
+    [
+      "organizations",
+      orgId,
+      "projects",
+      projectId,
+      "activity",
+      filters,
+    ] as const,
   taskList: (orgId: string, filters: QueryFilters = {}) =>
     ["organizations", orgId, "tasks", filters] as const,
   task: (orgId: string, taskId: string) =>
