@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { useLogout } from "@/features/auth/queries";
+import { PermissionGate } from "@/features/permissions/permission-gate";
+import type { Permission } from "@/features/permissions/permissions";
 import { useOrganization } from "@/features/organizations/api";
 import { OrganizationProvider } from "@/features/organizations/organization-context";
 import { useAuthStore } from "@/lib/api/auth-store";
@@ -29,6 +32,60 @@ function OrganizationState({
         <div className="mt-6 flex flex-wrap gap-4">{children}</div>
       </section>
     </main>
+  );
+}
+const workspaceLinks: {
+  label: string;
+  path: string;
+  permissions: Permission[];
+}[] = [
+  {
+    label: "Overview",
+    path: "/dashboard",
+    permissions: ["projects.read", "tasks.read"],
+  },
+  { label: "Projects", path: "/projects", permissions: ["projects.read"] },
+  { label: "Tasks", path: "/tasks", permissions: ["tasks.read"] },
+  { label: "Teams", path: "/teams", permissions: ["teams.read"] },
+  { label: "Members", path: "/members", permissions: ["members.read"] },
+  { label: "Roles", path: "/roles", permissions: ["roles.read"] },
+];
+
+function WorkspaceNavigation({ orgId }: { orgId: string }) {
+  const pathname = usePathname();
+  const base = `/orgs/${encodeURIComponent(orgId)}`;
+
+  return (
+    <nav
+      aria-label="Organization navigation"
+      className="order-3 flex w-full gap-1 overflow-x-auto pb-1 md:order-2 md:w-auto md:pb-0"
+    >
+      {workspaceLinks.map((item) => {
+        const href = `${base}${item.path}`;
+        const link = (
+          <Link
+            aria-current={pathname.startsWith(href) ? "page" : undefined}
+            className={`shrink-0 rounded-md px-3 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#346e58] ${pathname.startsWith(href) ? "bg-[#e7eee7] text-[#193c35]" : "text-[#53665d] hover:bg-[#f5f7f3] hover:text-[#193c35]"}`}
+            href={href}
+          >
+            {item.label}
+          </Link>
+        );
+
+        return item.permissions.reduceRight<ReactNode>(
+          (child, permission) => (
+            <PermissionGate
+              fallback={null}
+              key={`${item.path}-${permission}`}
+              permission={permission}
+            >
+              {child}
+            </PermissionGate>
+          ),
+          link,
+        );
+      })}
+    </nav>
   );
 }
 
@@ -116,11 +173,11 @@ export function OrganizationBoundary({
   return (
     <OrganizationProvider organization={organization.data}>
       <div className="min-h-screen bg-[#f2f4ef] text-[#1b2d27]">
-        <header className="flex min-h-16 items-center justify-between border-b border-[#d5ddd6] bg-white px-4 sm:px-8">
+        <header className="flex min-h-16 flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-[#d5ddd6] bg-white px-4 py-3 sm:px-8">
           <Link className="font-semibold tracking-wide" href="/orgs">
             TeamFlow
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="order-2 ml-auto flex items-center gap-4 md:order-3 md:ml-0">
             <span className="hidden max-w-48 truncate text-sm text-[#53665d] sm:inline">
               {organization.data.name}
             </span>
@@ -146,6 +203,7 @@ export function OrganizationBoundary({
               {logout.isPending ? "Signing out…" : "Sign out"}
             </button>
           </div>
+          <WorkspaceNavigation orgId={organization.data.id} />
         </header>
         {children}
       </div>
