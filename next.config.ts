@@ -9,6 +9,11 @@ const developmentScriptPolicy =
 const nextConfig: NextConfig = {
   reactCompiler: true,
   agentRules: false,
+  allowedDevOrigins: ["127.0.0.1"],
+  images: {
+    qualities: [75, 85],
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+  },
   async headers() {
     return [
       {
@@ -20,7 +25,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               `script-src 'self' 'unsafe-inline'${developmentScriptPolicy}`,
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob:",
+              "img-src 'self' data: blob: https://images.unsplash.com",
               "font-src 'self' data:",
               `connect-src 'self' ${apiOrigin}`,
               "object-src 'none'",

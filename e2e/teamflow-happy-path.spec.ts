@@ -1,5 +1,36 @@
 import { expect, test } from "@playwright/test";
 
+test("home presents the TeamFlow workspace and primary routes", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await expect(
+    page.getByRole("heading", { name: "TeamFlow", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /Get started/ })).toHaveAttribute(
+    "href",
+    "/register",
+  );
+  await expect(
+    page.getByRole("banner").getByRole("link", { name: "Sign in" }),
+  ).toHaveAttribute("href", "/login");
+  await expect(
+    page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: "Workspace" }),
+  ).toBeVisible();
+  const heroImage = page.getByRole("img", {
+    name: "A product team working together around a table",
+  });
+  await expect(heroImage).toBeVisible();
+  await expect
+    .poll(() =>
+      heroImage.evaluate((image) => (image as HTMLImageElement).naturalWidth),
+    )
+    .toBeGreaterThan(0);
+});
+
 test("appearance follows the system and supports explicit light/dark modes", async ({
   page,
 }) => {
