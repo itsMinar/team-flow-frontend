@@ -1,15 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowLeft, Pencil, Plus, Trash2, UserRoundPlus } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { Dialog } from "@/components/shared/dialog";
+import { useMembers } from "@/features/members/api";
 import { useActiveOrganization } from "@/features/organizations/organization-context";
 import { PermissionGate } from "@/features/permissions/permission-gate";
-import { useMembers } from "@/features/members/api";
-import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import type { TeamMember } from "@/features/teams/api";
 import {
   useAddTeamMember,
   useDeleteTeam,
@@ -17,8 +13,12 @@ import {
   useTeam,
   useTeamMembers,
 } from "@/features/teams/api";
-import type { TeamMember } from "@/features/teams/api";
 import { TeamFormDialog } from "@/features/teams/team-form-dialog";
+import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import { ArrowLeft, Pencil, Plus, Trash2, UserRoundPlus } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function TeamDetailScreen({ teamId }: { teamId: string }) {
   const organization = useActiveOrganization();

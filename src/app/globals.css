@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: #f2f4ef;
+  --foreground: #1b2d27;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --background: #111a16;
+  --foreground: #e5ece7;
 }
 
 @theme inline {
@@ -12,15 +19,47 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.dark [class*="bg-white"] {
+  background-color: #1d2a24;
+}
+
+.dark [class*="bg-[#f2f4ef]"],
+.dark [class*="bg-[#f5f7f3]"],
+.dark [class*="bg-[#f8faf7]"],
+.dark [class*="bg-[#edf1ec]"],
+.dark [class*="bg-[#e2e7e1]"],
+.dark [class*="bg-[#dce3dc]"] {
+  background-color: #15211b;
+}
+
+.dark [class*="text-[#1b2d27]"],
+.dark [class*="text-[#263b36]"],
+.dark [class*="text-[#34463e]"] {
+  color: #e5ece7;
+}
+
+.dark [class*="text-[#64756c]"],
+.dark [class*="text-[#53665d]"],
+.dark [class*="text-[#53665d]"] {
+  color: #aab9af;
+}
+
+.dark [class*="border-[#d5ddd6]"],
+.dark [class*="border-[#cbd4ce]"],
+.dark [class*="divide-[#e4e9e4]"] {
+  border-color: #3a4a40;
+}
+
+.dark input:not([type="checkbox"]),
+.dark select,
+.dark textarea {
+  color-scheme: dark;
+  background-color: #19271f;
+  color: #e5ece7;
 }

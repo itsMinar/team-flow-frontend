@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useWatch } from "react-hook-form";
 import { Dialog } from "@/components/shared/dialog";
 import { mapApiErrorToForm } from "@/features/auth/form-errors";
 import type { OrganizationRole } from "@/features/permissions/api";
@@ -16,6 +13,9 @@ import {
   type RoleFormInput,
   type RoleFormValues,
 } from "@/features/roles/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
 const permissionLabels: Record<Permission, string> = {
   "organizations.read": "Read organization",

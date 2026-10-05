@@ -1,5 +1,10 @@
 // @vitest-environment jsdom
 
+import type { Organization } from "@/features/organizations/api";
+import { OrganizationProvider } from "@/features/organizations/organization-context";
+import { TeamDetailScreen } from "@/features/teams/team-detail-screen";
+import { apiBaseURL } from "@/lib/api/axios";
+import { server } from "@/test/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   fireEvent,
@@ -10,11 +15,6 @@ import {
 } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { TeamDetailScreen } from "@/features/teams/team-detail-screen";
-import { OrganizationProvider } from "@/features/organizations/organization-context";
-import type { Organization } from "@/features/organizations/api";
-import { apiBaseURL } from "@/lib/api/axios";
-import { server } from "@/test/server";
 
 const { routerReplace } = vi.hoisted(() => ({ routerReplace: vi.fn() }));
 

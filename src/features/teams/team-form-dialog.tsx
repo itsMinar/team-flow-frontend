@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Dialog } from "@/components/shared/dialog";
 import { mapApiErrorToForm } from "@/features/auth/form-errors";
 import type { Team } from "@/features/teams/api";
@@ -12,6 +9,9 @@ import {
   type TeamFormInput,
   type TeamFormValues,
 } from "@/features/teams/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export function TeamFormDialog({
   orgId,

@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { useState } from "react";
-import { UsersRound } from "lucide-react";
 import { useActiveOrganization } from "@/features/organizations/organization-context";
 import { PermissionGate } from "@/features/permissions/permission-gate";
 import { useTeams } from "@/features/teams/api";
 import { TeamFormDialog } from "@/features/teams/team-form-dialog";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import { UsersRound } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export function TeamListScreen() {
   const organization = useActiveOrganization();

@@ -1,16 +1,16 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import type { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { ThemeSelect } from "@/components/shared/theme-select";
 import { useLogout } from "@/features/auth/queries";
-import { PermissionGate } from "@/features/permissions/permission-gate";
-import type { Permission } from "@/features/permissions/permissions";
 import { useOrganization } from "@/features/organizations/api";
 import { OrganizationProvider } from "@/features/organizations/organization-context";
+import { PermissionGate } from "@/features/permissions/permission-gate";
+import type { Permission } from "@/features/permissions/permissions";
 import { useAuthStore } from "@/lib/api/auth-store";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import type { ReactNode } from "react";
 
 function OrganizationState({
   title,
@@ -49,6 +49,18 @@ const workspaceLinks: {
   { label: "Teams", path: "/teams", permissions: ["teams.read"] },
   { label: "Members", path: "/members", permissions: ["members.read"] },
   { label: "Roles", path: "/roles", permissions: ["roles.read"] },
+  {
+    label: "Invitations",
+    path: "/invitations",
+    permissions: ["members.manage"],
+  },
+  {
+    label: "API keys",
+    path: "/api-keys",
+    permissions: ["api_keys.manage"],
+  },
+  { label: "Audit", path: "/audit-logs", permissions: ["audit.read"] },
+  { label: "Settings", path: "/settings", permissions: [] },
 ];
 
 function WorkspaceNavigation({ orgId }: { orgId: string }) {
@@ -67,6 +79,7 @@ function WorkspaceNavigation({ orgId }: { orgId: string }) {
             aria-current={pathname.startsWith(href) ? "page" : undefined}
             className={`shrink-0 rounded-md px-3 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#346e58] ${pathname.startsWith(href) ? "bg-[#e7eee7] text-[#193c35]" : "text-[#53665d] hover:bg-[#f5f7f3] hover:text-[#193c35]"}`}
             href={href}
+            key={item.path}
           >
             {item.label}
           </Link>
@@ -181,6 +194,7 @@ export function OrganizationBoundary({
             <span className="hidden max-w-48 truncate text-sm text-[#53665d] sm:inline">
               {organization.data.name}
             </span>
+            <ThemeSelect />
             <Link
               className="text-sm font-medium text-[#245448] underline underline-offset-4"
               href="/orgs"

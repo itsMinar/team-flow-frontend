@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import { TaskListScreen } from "@/features/tasks/task-list-screen";
+import { Suspense } from "react";
 
 export default function OrganizationTasksPage() {
   return (

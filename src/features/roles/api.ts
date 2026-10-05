@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiClient } from "@/lib/api/axios";
-import { organizationRolesQueryOptions } from "@/features/permissions/api";
 import type { OrganizationRole } from "@/features/permissions/api";
+import { organizationRolesQueryOptions } from "@/features/permissions/api";
+import { apiClient } from "@/lib/api/axios";
 import { queryKeys } from "@/lib/query/query-keys";
-import type { ApiResponse } from "@/types/api-envelope";
 import type { components } from "@/types/api";
+import type { ApiResponse } from "@/types/api-envelope";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export type RoleRequest = components["schemas"]["RoleRequest"];
 

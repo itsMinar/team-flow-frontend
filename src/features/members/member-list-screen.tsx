@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import {
   DataTable,
   type DataTableColumn,
 } from "@/components/shared/data-table";
-import { useActiveOrganization } from "@/features/organizations/organization-context";
-import { PermissionGate } from "@/features/permissions/permission-gate";
-import { useOrganizationRoles } from "@/features/permissions/api";
-import { useAssignMemberRole, useMembers } from "@/features/members/api";
 import type { Member } from "@/features/members/api";
+import { useAssignMemberRole, useMembers } from "@/features/members/api";
+import { useActiveOrganization } from "@/features/organizations/organization-context";
+import { useOrganizationRoles } from "@/features/permissions/api";
+import { PermissionGate } from "@/features/permissions/permission-gate";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import Link from "next/link";
+import { useState } from "react";
 
 type MemberRow = Member & { id: string };
 

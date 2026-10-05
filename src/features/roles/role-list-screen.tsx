@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { useActiveOrganization } from "@/features/organizations/organization-context";
-import { PermissionGate } from "@/features/permissions/permission-gate";
-import { useOrganizationRoles } from "@/features/permissions/api";
 import type { OrganizationRole } from "@/features/permissions/api";
-import { RoleFormDialog } from "@/features/roles/role-form-dialog";
+import { useOrganizationRoles } from "@/features/permissions/api";
+import { PermissionGate } from "@/features/permissions/permission-gate";
 import { useDeleteRole } from "@/features/roles/api";
+import { RoleFormDialog } from "@/features/roles/role-form-dialog";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import Link from "next/link";
+import { useState } from "react";
 
 function RoleRow({
   role,

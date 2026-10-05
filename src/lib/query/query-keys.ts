@@ -59,9 +59,10 @@ export const queryKeys = {
     ["organizations", orgId, "teams", teamId, "members"] as const,
   members: (orgId: string) => ["organizations", orgId, "members"] as const,
   roles: (orgId: string) => ["organizations", orgId, "roles"] as const,
-  invitations: (orgId: string) =>
-    ["organizations", orgId, "invitations"] as const,
-  apiKeys: (orgId: string) => ["organizations", orgId, "api-keys"] as const,
+  invitations: (orgId: string, filters: QueryFilters = {}) =>
+    ["organizations", orgId, "invitations", filters] as const,
+  apiKeys: (orgId: string, filters: QueryFilters = {}) =>
+    ["organizations", orgId, "api-keys", filters] as const,
   auditLogs: (orgId: string, filters: QueryFilters = {}) =>
     ["organizations", orgId, "audit-logs", filters] as const,
 };

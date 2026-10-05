@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { permissionKeys } from "@/features/permissions/permissions";
+import { z } from "zod";
 
 export const roleFormSchema = z.object({
   name: z.string().trim().min(1, "Role name is required").max(100),

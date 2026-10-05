@@ -1,14 +1,14 @@
 // @vitest-environment jsdom
 
+import type { Organization } from "@/features/organizations/api";
+import { OrganizationProvider } from "@/features/organizations/organization-context";
+import { TaskDetailScreen } from "@/features/tasks/task-detail-screen";
+import { apiBaseURL } from "@/lib/api/axios";
+import { server } from "@/test/server";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it, vi } from "vitest";
-import { TaskDetailScreen } from "@/features/tasks/task-detail-screen";
-import { OrganizationProvider } from "@/features/organizations/organization-context";
-import type { Organization } from "@/features/organizations/api";
-import { apiBaseURL } from "@/lib/api/axios";
-import { server } from "@/test/server";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ replace: vi.fn() }),

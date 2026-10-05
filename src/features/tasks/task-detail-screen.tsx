@@ -1,20 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { ArrowLeft, CalendarDays, Pencil, Trash2 } from "lucide-react";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
-import { TaskFormDialog } from "@/features/tasks/task-form-dialog";
 import { useActiveOrganization } from "@/features/organizations/organization-context";
 import { PermissionGate } from "@/features/permissions/permission-gate";
+import type { Task } from "@/features/tasks/api";
 import {
   useDeleteTask,
   useTask,
   useTaskActivity,
 } from "@/features/tasks/queries";
-import type { Task } from "@/features/tasks/api";
+import { TaskFormDialog } from "@/features/tasks/task-form-dialog";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import { ArrowLeft, CalendarDays, Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 function taskDate(value: string | null | undefined) {
   if (!value) return "Not set";
