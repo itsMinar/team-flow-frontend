@@ -108,7 +108,7 @@ function TaskDetailLoaded({ task }: { task: Task }) {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#587567]">
             {organization.name}
           </p>
-          <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight">
+          <h1 className="mt-2 wrap-break-word text-3xl font-semibold tracking-tight">
             {task.title}
           </h1>
           <p className="mt-2 max-w-3xl whitespace-pre-wrap text-sm leading-6 text-[#64756c]">

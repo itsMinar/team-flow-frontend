@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
+import type { ReactNode } from "react";
 
 export type DataTableColumn<T> = {
   id: string;
@@ -36,7 +36,7 @@ export function DataTable<T extends { id: string }>({
 }) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+      <table className="w-full min-w-180 border-collapse text-left text-sm">
         <caption className="sr-only">{caption}</caption>
         <thead className="bg-[#f5f7f3] text-xs uppercase text-[#64756c]">
           <tr>

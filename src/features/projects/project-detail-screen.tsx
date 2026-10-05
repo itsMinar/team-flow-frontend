@@ -1,15 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import {
-  ArrowLeft,
-  CalendarDays,
-  ListTodo,
-  Pencil,
-  Trash2,
-} from "lucide-react";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { useActiveOrganization } from "@/features/organizations/organization-context";
 import { PermissionGate } from "@/features/permissions/permission-gate";
@@ -20,6 +10,16 @@ import {
   useProjectActivity,
 } from "@/features/projects/queries";
 import { normalizeApiError } from "@/lib/api/normalize-api-error";
+import {
+  ArrowLeft,
+  CalendarDays,
+  ListTodo,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 function displayDate(value: string | null | undefined) {
   if (!value) return "Not set";
@@ -99,7 +99,7 @@ export function ProjectDetailScreen({ projectId }: { projectId: string }) {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#587567]">
             {organization.name}
           </p>
-          <h1 className="mt-2 break-words text-3xl font-semibold tracking-tight">
+          <h1 className="mt-2 wrap-break-word text-3xl font-semibold tracking-tight">
             {projectValue.name}
           </h1>
           <p className="mt-2 max-w-3xl whitespace-pre-wrap text-sm leading-6 text-[#64756c]">

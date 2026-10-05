@@ -37,7 +37,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
           </p>
         </aside>
         <main className="flex min-h-screen items-center justify-center px-5 py-10 sm:px-8">
-          <div className="w-full max-w-[440px]">
+          <div className="w-full max-w-110">
             <div className="mb-10 flex items-center justify-between gap-4 lg:hidden">
               <Brand />
               <ThemeSelect />
